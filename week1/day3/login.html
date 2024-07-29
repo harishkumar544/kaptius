@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+        <style>
+            .custom-border {
+              border: 2px solid white;
+              border-radius: 10px;
+            }
+        
+            .custom-shadow {
+              box-shadow: 2px 5px 10px whitesmoke;
+            }
+          </style>
+
+    </head>
+    <body>
+
+        <div class="w-100 d-flex justify-content-center align-items-center bg-dark" style="height: 100vh;">
+
+
+            <form onsubmit="handleSubmit(event)" class="d-flex flex-column bg-light custom-border custom-shadow p-5">
+                <h3 class="text-center">Log In</h3>
+
+                <input type="email" id="email" placeholder="Email Id" required class="mt-3 rounded"/>
+                <input type="password" id="password" placeholder="Password" required class="mt-3 rounded"/>
+                <input type="submit" value="Submit" class="btn btn-primary mt-3"/>
+                <p>You don't have account ? <a href="signUp.html">Sign Up</a></p>
+            </form>
+        </div>
+
+        <script>
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            function handleSubmit(event) {
+                event.preventDefault();
+
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                const user = users.find(user => user.email === email);
+
+                if (user) {
+                    console.log(user); 
+                    if (user.password === password) {
+                        alert("Login successful!");
+                        window.location.href = 'dashbordh.html';
+                        
+                    } else {
+                        alert("Invalid password. Please try again.");
+                    }
+                } else {
+                    alert("Email not found. Please try again.");
+                }
+            }
+        </script>
+    </body>
+</html>
